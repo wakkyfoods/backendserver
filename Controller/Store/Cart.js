@@ -166,12 +166,12 @@ const deleteCart = async (req, res) => {
     const user = await userSchema.findOne({
       _id: verifyToken.id,
     });
-    if (user.verified != true) {
-      return res.status(401).json({
-        status: "ERROR",
-        message: "You are not authorized to perform this action",
-      });
-    }
+    // if (user.verified != true) {
+    //   return res.status(401).json({
+    //     status: "ERROR",
+    //     message: "You are not authorized to perform this action",
+    //   });
+    // }
 
     const newCart = user.cart.filter((item) => item._id != req.params.id);
     user.cart = newCart;

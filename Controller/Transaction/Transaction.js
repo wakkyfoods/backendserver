@@ -213,12 +213,12 @@ const updateTransaction = async (req, res) => {
     });
 
     // condition user with access
-    if (allowAccess.verified != true) {
-      return res.status(401).json({
-        status: "ERROR",
-        message: "You are not authorized to perform this action",
-      });
-    }
+    // if (allowAccess.verified != true) {
+    //   return res.status(401).json({
+    //     status: "ERROR",
+    //     message: "You are not authorized to perform this action",
+    //   });
+    // }
 
     // update transaction
     const transaction = await transactionSchema.findOneAndUpdate(
