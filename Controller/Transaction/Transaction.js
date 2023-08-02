@@ -9,7 +9,7 @@ const postTransaction = async (req, res) => {
     //
     const { deliveryaddress, product, anyinfo, deliveryfee, homedelivery } =
       req.body;
-
+    // console.log(deliveryaddress, product, anyinfo, deliveryfee, homedelivery);
     // check if the user has a successful token login
     const auth = req.headers.authorization;
     if (!auth || !auth.startsWith("Bearer ")) {
@@ -34,6 +34,7 @@ const postTransaction = async (req, res) => {
     if (!user) {
       res.status(401).json({ msg: "user not found" });
     }
+    console.log(user.useremail.split(".com")[0] + ".com");
     const deliverycharges = deliveryfee + homedelivery;
     const products = [];
     let totalAmount = deliverycharges;
@@ -68,7 +69,7 @@ const postTransaction = async (req, res) => {
     };
 
     const data = {
-      email: user.useremail,
+      email: user.useremail.split(".com")[0] + ".com",
       amount: totalAmount * 100, // Paystack amount is in kobo (i.e. 100 kobo = 1 Naira)
       metadata: {
         delivery_address: deliveryaddress,
@@ -114,8 +115,8 @@ const postTransaction = async (req, res) => {
       },
     });
   } catch (error) {
+    // console.log(error);
     throw new Error(error);
-    console.log(error);
   }
 };
 
