@@ -28,12 +28,12 @@ const loginUser = async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.password);
 
     // if user have not verified email then no access
-    if (user.verified === false) {
-      return res.status(403).json({
-        status: "ERROR",
-        message: "Email has not been verified, Kindly Verify you email",
-      });
-    }
+    // if (user.verified === false) {
+    //   return res.status(403).json({
+    //     status: "ERROR",
+    //     message: "Email has not been verified, Kindly Verify you email",
+    //   });
+    // }
     // if user have been blocked
     if (user.block === true) {
       return res.status(403).json({
